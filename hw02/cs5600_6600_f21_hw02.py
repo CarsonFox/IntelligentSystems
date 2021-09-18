@@ -6,6 +6,15 @@
 # YOUR A#
 #########################################
 
+############################################
+# Neural networks were trained with 1,000
+# Iterations. The structures matched those
+# found in the unit tests; binary operators
+# used 2x3x1 and 2x3x3x1, not used 1x2x1 and
+# 1x2x2x1, and the boolean expression used
+# 4x2x1 and 4x2x2x1.
+############################################
+
 import numpy as np
 import pickle
 from itertools import accumulate
