@@ -8,18 +8,17 @@
 
 import numpy as np
 import pickle
-from cs5600_6600_f20_hw02_data import *
+from cs5600_6600_f21_hw02_data import *
 
 # sigmoid function and its derivative.
 # you'll use them in the training and fitting
 # functions below.
 def sigmoidf(x):
-    ## your code here
-    pass
+    return 1 / (1 + exp(-x))
 
 def sigmoidf_prime(x):
-    ## your code here
-    pass
+    #approximate
+    return x * (1 - x)
 
 # persists object obj to a file with pickle.dump()
 def save(obj, file_name):
@@ -33,8 +32,8 @@ def load(file_name):
     return obj
 
 def build_nn_wmats(mat_dims):
-    ## your code here
-    pass
+    pairs = zip(mat_dims[:-1], mat_dims[1:])
+    return [np.random.rand(m, n) for (m, n) in pairs]
 
 def build_231_nn():
     return build_nn_wmats((2, 3, 1))
