@@ -75,7 +75,7 @@ def backprop(activations, y, X, nn):
 
     for i in range(1, len(nn)):
         error = delta @ nn[-i].T
-        nn[-i] += activations[-i].T @ delta
+        nn[-i] += activations[-i - 1].T @ delta
         delta = error * sigmoidf_prime(activations[-i - 1])
 
     nn[0] += X.T @ delta
