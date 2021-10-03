@@ -13,8 +13,8 @@ DIR_PATH = '/home/fox/Documents/Intelligent Systems/hw04/'
 
 train_d, valid_d, test_d = load_data_wrapper()
 
-lmbda = map(lambda x: x/10, range(1, 9, 2))
-eta = map(lambda x: x/10, range(1, 9, 2))
+lmbda = list(map(lambda x: x/10, range(0, 8, 2)))
+eta = list(map(lambda x: x/10, range(1, 9, 2)))
 
 def find_best_size(training_stats):
     final_accuracies = { n: stats[3][-1] for n, stats in training_stats.items() }
@@ -29,9 +29,9 @@ def find_best_params(stats_fn):
     best = max(maxes, key=maxes.get)
     return best, maxes[best]
 
-d1 = lambda l, e: collect_1_hidden_layer_net_stats(10, 11, CrossEntropyCost, 2, 10, e, l, train_d, test_d)
-d2 = lambda l, e: collect_2_hidden_layer_net_stats(10, 11, CrossEntropyCost, 2, 10, e, l, train_d, test_d)
-d3 = lambda l, e: collect_3_hidden_layer_net_stats(10, 11, CrossEntropyCost, 2, 10, e, l, train_d, test_d)
+d1 = lambda l, e: collect_1_hidden_layer_net_stats(10, 11, CrossEntropyCost, 5, 10, e, l, train_d, test_d)
+d2 = lambda l, e: collect_2_hidden_layer_net_stats(10, 11, CrossEntropyCost, 5, 10, e, l, train_d, test_d)
+d3 = lambda l, e: collect_3_hidden_layer_net_stats(10, 11, CrossEntropyCost, 5, 10, e, l, train_d, test_d)
 
 print('Best 1-layer size: ', find_best_params(d1))
 print('Best 2-layer size: ', find_best_params(d2))

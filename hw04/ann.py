@@ -151,7 +151,7 @@ class ann(object):
                 for k in range(0, n_train_data, mini_batch_size)]
             for mini_batch in mini_batches:
                 self.update_mini_batch(mini_batch, eta, lmbda, len(training_data))
-            print("Epoch {} training complete".format(j))
+            #print("Epoch {} training complete".format(j))
             if monitor_training_cost:
                 cost = self.total_cost(training_data, lmbda)
                 training_cost.append(cost)
@@ -169,7 +169,7 @@ class ann(object):
                 evaluation_accuracy.append(accuracy/float(n_eval_data))
                 #print("Accuracy on evaluation data: {} / {}".format(self.accuracy(evaluation_data),
 #                                                                    n_eval_data))
-            print()
+            #print()
         return evaluation_cost, evaluation_accuracy, \
                training_cost, training_accuracy
 
