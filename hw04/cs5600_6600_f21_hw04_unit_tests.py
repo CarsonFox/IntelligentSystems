@@ -20,13 +20,11 @@ from cs5600_6600_f21_hw04 import collect_3_hidden_layer_net_stats
 from mnist_loader import load_data_wrapper
 
 ## change this directory accordingly.
-DIR_PATH = '/home/vladimir/teaching/AI/F21/hw/hw04/sols/nets/'
+DIR_PATH = '/home/fox/Documents/Intelligent Systems/hw04'
 
 train_d, valid_d, test_d = load_data_wrapper()
 
-class cs5600_6600_f21_hw02_uts(unittest.TestCase):
-
-    
+class dummy():
     def test_ut01(self):
         global train_d
         net = ann([784, 10, 10], cost=CrossEntropyCost)
@@ -38,7 +36,7 @@ class cs5600_6600_f21_hw02_uts(unittest.TestCase):
                                        monitor_training_cost=True,
                                        monitor_training_accuracy=True)
         plot_costs(net_stats[0], net_stats[2], 5)
-    
+
     def test_ut02(self):
         global train_d
         net = ann([784, 10, 10], cost=CrossEntropyCost)
@@ -50,8 +48,9 @@ class cs5600_6600_f21_hw02_uts(unittest.TestCase):
                                        monitor_training_cost=True,
                                        monitor_training_accuracy=True)
         plot_accuracies(net_stats[1], net_stats[3], 10)
- 
 
+
+class cs5600_6600_f21_hw02_uts(unittest.TestCase):
     def test_ut03(self):
         d = collect_1_hidden_layer_net_stats(10, 11,
                                              CrossEntropyCost,
@@ -108,11 +107,7 @@ class cs5600_6600_f21_hw02_uts(unittest.TestCase):
             net2.accuracy(evaluation_data), len(evaluation_data)))
         print("net3's accuracy on evaluation data: {} / {}".format(
             net3.accuracy(evaluation_data), len(evaluation_data)))
-     
+
 if __name__ == '__main__':
     unittest.main()
     pass
-    
-        
-    
-

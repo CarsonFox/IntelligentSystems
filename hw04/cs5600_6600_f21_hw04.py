@@ -37,7 +37,7 @@ def plot_costs(eval_costs, train_costs, num_epochs):
     epochs = [i for i in range(num_epochs)]
     plt.plot(epochs, eval_costs, label='EC', c='g')
     plt.plot(epochs, train_costs, label='TC', c='b')
-    plt.grid()    
+    plt.grid()
     plt.autoscale(tight=True)
     plt.legend(loc='best')
     plt.show()
@@ -51,45 +51,31 @@ def plot_accuracies(eval_accs, train_accs, num_epochs):
     plt.plot(epochs, train_accs, label='TA', c='b')
     plt.grid()
     plt.autoscale(tight=True)
-    plt.legend(loc='best')    
+    plt.legend(loc='best')
     plt.show()
+
+def net_stats(layers,
+                                     cost_function,
+                                     num_epochs,
+                                     mbs,
+                                     eta,
+                                     lmbda,
+                                     train_data,
+                                     eval_data):
+    net = ann(layers, cost=cost_function)
+    return net.mini_batch_sgd(train_data, num_epochs, mbs, eta, lmbda=lmbda, evaluation_data=eval_data, monitor_evaluation_accuracy=True,
+                              monitor_evaluation_cost=True, monitor_training_accuracy=True, monitor_training_cost=True)
 
 ## num_nodes -> (eval_cost, eval_acc, train_cost, train_acc)
 ## use this function to compute the eval_acc and min_cost.
-def collect_1_hidden_layer_net_stats(lower_num_hidden_nodes,
-                                     upper_num_hidden_nodes,
-                                     cost_function,
-                                     num_epochs,
-                                     mbs,
-                                     eta,
-                                     lmbda,
-                                     train_data,
-                                     eval_data):
-    ### your code here
-    pass
+def collect_1_hidden_layer_net_stats(*args):
+    (l, u, *rest) = args
+    return { n: net_stats(*([784, n, 10], *rest)) for n in range(l, u + 1) }
 
-def collect_2_hidden_layer_net_stats(lower_num_hidden_nodes,
-                                     upper_num_hidden_nodes,
-                                     cost_function,
-                                     num_epochs,
-                                     mbs,
-                                     eta,
-                                     lmbda,
-                                     train_data,
-                                     eval_data):
-    ### your code here
-    pass
-    
-def collect_3_hidden_layer_net_stats(lower_num_hidden_nodes,
-                                     upper_num_hidden_nodes,
-                                     cost_function,
-                                     num_epochs,
-                                     mbs,
-                                     eta,
-                                     lmbda,
-                                     train_data,
-                                     eval_data):
-    ### your code here
-    pass
+def collect_2_hidden_layer_net_stats(*args):
+    (l, u, *rest) = args
+    return { n: net_stats(*([784, n, 10], *rest)) for n in range(l, u + 1) }
 
-        
+def collect_3_hidden_layer_net_stats(*args):
+    (l, u, *rest) = args
+    return { n: net_stats(*([784, n, 10], *rest)) for n in range(l, u + 1) }
