@@ -20,11 +20,12 @@ from cs5600_6600_f21_hw04 import collect_3_hidden_layer_net_stats
 from mnist_loader import load_data_wrapper
 
 ## change this directory accordingly.
-DIR_PATH = '/home/fox/Documents/Intelligent Systems/hw04'
+DIR_PATH = '/home/fox/Documents/Intelligent Systems/hw04/'
 
 train_d, valid_d, test_d = load_data_wrapper()
 
-class dummy():
+
+class cs5600_6600_f21_hw02_uts(unittest.TestCase):
     def test_ut01(self):
         global train_d
         net = ann([784, 10, 10], cost=CrossEntropyCost)
@@ -49,8 +50,6 @@ class dummy():
                                        monitor_training_accuracy=True)
         plot_accuracies(net_stats[1], net_stats[3], 10)
 
-
-class cs5600_6600_f21_hw02_uts(unittest.TestCase):
     def test_ut03(self):
         d = collect_1_hidden_layer_net_stats(10, 11,
                                              CrossEntropyCost,

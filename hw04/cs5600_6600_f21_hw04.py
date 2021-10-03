@@ -1,5 +1,7 @@
 #/usr/bin/python
 
+from itertools import product
+
 from ann import *
 import numpy as np
 import scipy as sp
@@ -74,8 +76,12 @@ def collect_1_hidden_layer_net_stats(*args):
 
 def collect_2_hidden_layer_net_stats(*args):
     (l, u, *rest) = args
-    return { n: net_stats(*([784, n, 10], *rest)) for n in range(l, u + 1) }
+    sizes = range(l, u + 1)
+    return { f'{n1}_{n2}': net_stats(*([784, n1, n2, 10], *rest))
+            for n1, n2 in product(sizes, sizes) }
 
 def collect_3_hidden_layer_net_stats(*args):
     (l, u, *rest) = args
-    return { n: net_stats(*([784, n, 10], *rest)) for n in range(l, u + 1) }
+    sizes = range(l, u + 1)
+    return { f'{n1}_{n2}_{n3}': net_stats(*([784, n1, n2, n3, 10], *rest))
+            for n1, n2, n3 in product(sizes, sizes, sizes) }
