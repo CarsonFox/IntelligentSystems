@@ -9,8 +9,8 @@ import matplotlib.pyplot as plt
 
 ####################################
 # CS5600/6600: F21: HW04
-# Your Name
-# Your A#
+# Carson Fox
+# A02251670
 # Write your code at the end of
 # this file in the provided
 # function stubs.
