@@ -50,22 +50,29 @@ def load_tfl_mnist_convnet(model_path):
     model.load(model_path)
     return model
 
-def make_shallow_tfl_mnist_ann():
+def shallow_tfl_mnist_ann_layers():
     input_layer = input_data(shape=[None, 28, 28, 1])
 
     fc_layer = fully_connected(input_layer, 20,
                                  activation='sigmoid',
                                  name='fc_layer')
-    output_layer = fully_connected(fc_layer, 10,
+    return fully_connected(fc_layer, 10,
                                  activation='softmax',
                                  name='output_layer')
+
+def make_shallow_tfl_mnist_ann():
+    output_layer = shallow_tfl_mnist_ann_layers()
     network = regression(output_layer, optimizer='sgd',
                          loss='categorical_crossentropy',
                          learning_rate=0.1)
     model = tflearn.DNN(network)
     return model
 
-def make_deeper_tfl_mnist_convnet():
+def load_shallow_tfl_mnist_ann(model_path):
+    ### your code here
+    pass
+
+def deeper_tfl_mnist_convnet_layers():
     input_layer = input_data(shape=[None, 28, 28, 1])
 
     conv_layer_1 = conv_2d(input_layer, nb_filter=20,
@@ -90,18 +97,17 @@ def make_deeper_tfl_mnist_convnet():
                                  name='fc_layer_2')
     fc_layer_2 = dropout(fc_layer_2, 0.5)
 
-    output_layer = fully_connected(fc_layer_2, 10,
+    return fully_connected(fc_layer_2, 10,
                                  activation='softmax',
                                  name='output_layer')
+
+def make_deeper_tfl_mnist_convnet():
+    output_layer = deeper_tfl_mnist_convnet_layers()
     network = regression(output_layer, optimizer='sgd',
                          loss='categorical_crossentropy',
                          learning_rate=0.1)
     model = tflearn.DNN(network)
     return model
-
-def load_shallow_tfl_mnist_ann(model_path):
-    ### your code here
-    pass
 
 def load_deeper_tfl_mnist_convnet(model_path):
     ### your code here
