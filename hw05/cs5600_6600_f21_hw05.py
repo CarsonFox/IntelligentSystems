@@ -2,8 +2,8 @@
 
 ###########################################
 # module: cs5600_6600_f21_hw05.py
-# YOUR NAME
-# YOUR A-NUMBER
+# Carson Fox
+# A02251670
 ###########################################
 
 import numpy as np
@@ -80,6 +80,3 @@ def test_tfl_model(model, X, Y):
         if np.argmax(pred, axis=1)[0] == np.argmax(gt):
             cnt += 1
     return cnt/len(X)
-        
-    
-        
