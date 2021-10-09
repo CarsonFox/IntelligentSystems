@@ -59,14 +59,15 @@ class cs5600_6600_f21_hw05_uts(unittest.TestCase):
         print(prediction == ground_truth)
     '''
 
+    '''
     def test_ut03(self):
         tf.compat.v1.reset_default_graph()
         model = load_tfl_mnist_convnet(NET_PATH + 'my_tfl_mnist_convnet')
         assert model is not None
         acc = test_tfl_model(model, validX, validY)
         print('tfl mnist model acc = {}'.format(acc))
-
     '''
+
     def test_ut04(self):
         tf.compat.v1.reset_default_graph()
         deeper_model = make_deeper_tfl_mnist_convnet()
@@ -76,7 +77,6 @@ class cs5600_6600_f21_hw05_uts(unittest.TestCase):
                       trainX, trainY, testX, testY,
                       model_name, NET_PATH,
                       n_epoch=5, mbs=10)
-    '''
 
     '''
     def test_ut05(self):
