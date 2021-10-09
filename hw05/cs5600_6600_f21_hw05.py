@@ -69,8 +69,10 @@ def make_shallow_tfl_mnist_ann():
     return model
 
 def load_shallow_tfl_mnist_ann(model_path):
-    ### your code here
-    pass
+    layers = shallow_tfl_mnist_ann_layers()
+    model = tflearn.DNN(layers)
+    model.load(model_path)
+    return model
 
 def deeper_tfl_mnist_convnet_layers():
     input_layer = input_data(shape=[None, 28, 28, 1])
@@ -110,8 +112,10 @@ def make_deeper_tfl_mnist_convnet():
     return model
 
 def load_deeper_tfl_mnist_convnet(model_path):
-    ### your code here
-    pass
+    layers = deeper_tfl_mnist_convnet_layers()
+    model = tflearn.DNN(layers)
+    model.load(model_path)
+    return model
 
 def fit_tfl_model(model, trainX, trainY, testX, testY, model_name, net_path, n_epoch=1, mbs=10):
     model.fit(trainX, trainY, n_epoch=n_epoch, shuffle=True,
