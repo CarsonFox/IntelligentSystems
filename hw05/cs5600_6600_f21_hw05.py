@@ -51,8 +51,19 @@ def load_tfl_mnist_convnet(model_path):
     return model
 
 def make_shallow_tfl_mnist_ann():
-    ### your code here
-    pass
+    input_layer = input_data(shape=[None, 28, 28, 1])
+
+    fc_layer = fully_connected(input_layer, 20,
+                                 activation='sigmoid',
+                                 name='fc_layer')
+    output_layer = fully_connected(fc_layer, 10,
+                                 activation='softmax',
+                                 name='output_layer')
+    network = regression(output_layer, optimizer='sgd',
+                         loss='categorical_crossentropy',
+                         learning_rate=0.1)
+    model = tflearn.DNN(network)
+    return model
 
 def make_deeper_tfl_mnist_convnet():
     input_layer = input_data(shape=[None, 28, 28, 1])
