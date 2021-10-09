@@ -68,6 +68,7 @@ class cs5600_6600_f21_hw05_uts(unittest.TestCase):
         print('tfl mnist model acc = {}'.format(acc))
     '''
 
+    '''
     def test_ut04(self):
         tf.compat.v1.reset_default_graph()
         deeper_model = make_deeper_tfl_mnist_convnet()
@@ -77,8 +78,8 @@ class cs5600_6600_f21_hw05_uts(unittest.TestCase):
                       trainX, trainY, testX, testY,
                       model_name, NET_PATH,
                       n_epoch=5, mbs=10)
-
     '''
+
     def test_ut05(self):
         tf.compat.v1.reset_default_graph()
         model_name = 'my_deeper_tfl_mnist_model'
@@ -86,8 +87,8 @@ class cs5600_6600_f21_hw05_uts(unittest.TestCase):
         assert deeper_model is not None
         acc = test_tfl_model(deeper_model, validX, validY)
         print('tfl mnist deeper convnet acc = {}'.format(acc))
-    '''
 
+    '''
     def test_ut06(self):
         tf.compat.v1.reset_default_graph()
         shallow_model = make_shallow_tfl_mnist_ann()
@@ -97,8 +98,8 @@ class cs5600_6600_f21_hw05_uts(unittest.TestCase):
                       trainX, trainY, testX, testY,
                       model_name, NET_PATH,
                       n_epoch=5, mbs=10)
-
     '''
+
     def test_ut07(self):
         tf.compat.v1.reset_default_graph()
         model_name = 'my_shallow_tfl_mnist_ann'
@@ -106,7 +107,6 @@ class cs5600_6600_f21_hw05_uts(unittest.TestCase):
         assert shallow_model is not None
         acc = test_tfl_model(shallow_model, validX, validY)
         print('shallow tfl mnist ann acc = {}'.format(acc))
-    '''
 
     pass
 

@@ -1,2 +1,5 @@
 mnist/
-nets/
+nets/checkpoint
+nets/my_tfl_mnist_convnet.data-00000-of-00001
+nets/my_tfl_mnist_convnet.index
+nets/my_tfl_mnist_convnet.meta
