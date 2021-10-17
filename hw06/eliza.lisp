@@ -122,7 +122,7 @@ Bugs to vladimir kulyukin in canvas
     ;;; rule 10
     (((?* ?z) hate (?* ?x))
       (What do you hate about ?x)
-      (Maybe ?x isn't as bad as you think)
+      (Maybe ?x is not as bad as you think)
       (Well I happen to _LOVE_ ?x)
       (?x hates you too))
 
@@ -214,22 +214,28 @@ Bugs to vladimir kulyukin in canvas
      (you should focus on yourself))
 
     ;;; rule 24
-    (((?* ?x) patter (?* ?y))
-     (form))
+    ((do you think (?* ?y))
+     (what about you?)
+     (I do not think ?y)
+     (probably. but what if it is not the case?))
 
     ;;; rule 25
-    (((?* ?x) patter (?* ?y))
-     (form))
+    (((?* ?x) is (?* ?y))
+     (are you sure?)
+     (could ?x be anything but ?y)
+     (how do you feel about ?x))
 
     ;;; rule 26
-    (((?* ?x) patter (?* ?y))
-     (form))
+    ((what is (?* ?y))
+     (I do not know. what do you think?)
+     (how would you find the answer to that?)
+     (I do not know what ?y is))
 
     ;;; rule 27
     (((?* ?y))
-     (stop talking about ?y)
-     (I do not know about ?y)
-     (?y is not important))
+     (we should talk about something else)
+     (that is not important)
+     (how does that make you feel?))
    ))
 
 ;;; ==============================
