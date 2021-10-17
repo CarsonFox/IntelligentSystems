@@ -157,19 +157,79 @@ Bugs to vladimir kulyukin in canvas
      (how will ?x ?y)
      (what do ?x hope to accomplish when ?x ?y))
 
+    ;;; rule 15.5
+    (((?* ?x) need to (?* ?y))
+     (why do ?x have to ?y)
+     (when will ?x ?y)
+     (how will ?x ?y)
+     (what do ?x hope to accomplish when ?x ?y))
+
     ;;; rule 16
     (((?* ?x) is (?* ?y) favorite (?* ?z))
      (what is ?y second-favorite ?z)
-     (what awful taste in ?z)
      (then what is the worst ?z)
-     (?x is not that nice)
+     (?x is not that nice is it?)
      (why is ?x your favorite?))
 
     ;;; rule 17
     ((because (?* ?x))
-     (that is a bad reason)
-     (is that what you really think?)
-     (that is not true))
+     (is that a good enough reason?)
+     (is there any other reason?))
+
+
+    ;;; rule 18
+    (((?* ?x) can (?* ?y))
+     (how often do ?x ?y)
+     (what makes it possible for ?x to ?y))
+
+    ;;; rule 19
+    (((?* ?x) have (?* ?y))
+     (when did ?x get ?y)
+     (why did ?x get ?y)
+     (how much did ?y cost?))
+
+    ;;; rule 20
+    ((why is (?* ?y))
+     (because that is the way it is)
+     (why do you think?)
+     (google it)
+     (you know why))
+
+    ;;; rule 21
+    (((?* ?x) love (?* ?y))
+     (what do ?x love about ?y)
+     (are you sure? maybe ?y is not as good as you think))
+
+    ;;; rule 22
+    (((?* ?x) am (?* ?y))
+     (what made ?x that way?)
+     (are ?x sure about that?)
+     (are ?x okay being ?y))
+
+    ;;; rule 23
+    ((you (?* ?x))
+     (we are not talking about myself)
+     (stop changing the subject)
+     (I do not want to talke about myself)
+     (you should focus on yourself))
+
+    ;;; rule 24
+    (((?* ?x) patter (?* ?y))
+     (form))
+
+    ;;; rule 25
+    (((?* ?x) patter (?* ?y))
+     (form))
+
+    ;;; rule 26
+    (((?* ?x) patter (?* ?y))
+     (form))
+
+    ;;; rule 27
+    (((?* ?y))
+     (stop talking about ?y)
+     (I do not know about ?y)
+     (?y is not important))
    ))
 
 ;;; ==============================
