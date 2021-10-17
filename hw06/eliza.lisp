@@ -133,10 +133,43 @@ Bugs to vladimir kulyukin in canvas
      (I don't think so.))
 
     ;;; rule 12
-    (((?* ?x) can't (?* ?y))
-     (maybe you were never meant to ?y)
-     (you do not want to ?y anyways)
-     (what do you need to do before you can ?y))
+    (((?* ?x) cannot (?* ?y))
+     (maybe ?x were never meant to ?y)
+     (?x do not want to ?y anyways)
+     (what needs to happen before ?x can ?y))
+
+    ;;; rule 13
+    (((?* ?x) will (?* ?y))
+     (when will ?x ?y)
+     (why would ?x do that?)
+     (how will you feel when that happens?))
+
+    ;;; rule 14
+    (((?* ?x) feel (?* ?y))
+     (when do ?x feel that way?)
+     (what makes ?x feel ?y)
+     (what can ?x do about it?))
+
+    ;;; rule 15
+    (((?* ?x) have to (?* ?y))
+     (why do ?x have to ?y)
+     (when will ?x ?y)
+     (how will ?x ?y)
+     (what do ?x hope to accomplish when ?x ?y))
+
+    ;;; rule 16
+    (((?* ?x) is (?* ?y) favorite (?* ?z))
+     (what is ?y second-favorite ?z)
+     (what awful taste in ?z)
+     (then what is the worst ?z)
+     (?x is not that nice)
+     (why is ?x your favorite?))
+
+    ;;; rule 17
+    ((because (?* ?x))
+     (that is a bad reason)
+     (is that what you really think?)
+     (that is not true))
    ))
 
 ;;; ==============================
