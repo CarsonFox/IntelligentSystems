@@ -107,6 +107,36 @@ Bugs to vladimir kulyukin in canvas
     ;;; add your rules here
     ;;; ========== your rules end
 
+    ;;; rule 8
+    (((?* ?z) am afraid of (?* ?x))
+     (When did you first notice you were afraid of ?x)
+     (What caused your fear of ?x)
+     (Why are you so scared of ?x))
+
+    ;;; rule 9
+    (((?* ?x) want to (?* ?y))
+     (Why do you think you want to ?y)
+     (What will it accomplish to ?y)
+     (After you ?y what will you do?))
+
+    ;;; rule 10
+    (((?* ?z) hate (?* ?x))
+      (What do you hate about ?x)
+      (Maybe ?x isn't as bad as you think)
+      (Well I happen to _LOVE_ ?x)
+      (?x hates you too))
+
+    ;;; rule 11
+    (((?* ?x) think that (?* ?y))
+     (why do you feel that way?)
+     (do you think that is a popular opinion?)
+     (I don't think so.))
+
+    ;;; rule 12
+    (((?* ?x) can't (?* ?y))
+     (maybe you were never meant to ?y)
+     (you do not want to ?y anyways)
+     (what do you need to do before you can ?y))
    ))
 
 ;;; ==============================
