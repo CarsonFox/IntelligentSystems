@@ -68,29 +68,35 @@ Description: Simple word definitions for CA
 
 (define-ca-word
     went
-    ;;; your code here
-    )
+    (concept ?act (ptrans :time (past)))
+    (request (test (before ?act ?actor (animate)))
+             (actions
+               (modify ?act :object ?actor)
+               (modify ?act :actor ?actor)))
+    (request (test (and
+                     (not (after ?act nil (to)))
+                     (after ?act ?loc (location))))
+             (actions (modify ?act :to ?loc))))
 
 (define-ca-word
     restaurant
-    ;;; your code here
-    )
+    (concept nil (restaurant)))
 
 (define-ca-word
     home
-    ;;; your code here
-    )
+    (concept nil (home)))
 
 (define-ca-word
     to
-    ;;; your code here
-    )
-
+    (concept ?x (to))
+    (request (test (and
+                     (before ?x ?act (ptrans))
+                     (after ?x ?loc (location))))
+             (actions (modify ?act :to ?loc))))
 
 (define-ca-word
     lobster
-    ;;; your code here
-    )
+    (concept nil (lobster)))
 
 ;;; end-of-file
 
