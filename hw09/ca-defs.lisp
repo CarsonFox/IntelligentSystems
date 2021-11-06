@@ -20,8 +20,7 @@ Description: Some word definitions for CA
 
 (define-ca-word
     ann
-    ;;; your code here
-    )
+    (concept nil (human :name (ann) :sex (female))))
 
 (define-ca-word 
     ate
@@ -33,18 +32,17 @@ Description: Some word definitions for CA
 
 (define-ca-word
     bought
-    ;;; your code here
-    )
+    (concept ?pay (atrans :object (money) :time (past)))
+    (request (test (before ?pay ?actor (animate)))
+             (actions (modify ?pay :actor ?actor))))
 
 (define-ca-word
     kite
-    ;;; your code here
-    )
+    (concept nil (kite)))
 
 (define-ca-word
     store
-    ;;; your code here
-    )
+    (concept nil (store)))
 
 (define-ca-word
     went
