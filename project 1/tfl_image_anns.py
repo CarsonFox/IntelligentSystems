@@ -104,7 +104,7 @@ assert BEE4_gray_valid_X.shape[0] == BEE4_gray_valid_Y.shape[0]
 # plus the input layer and the output layer of appropriate dimensions.
 
 
-def make_image_ann_model():
+def example_image_ann_model():
     input_layer = input_data(shape=[None, 64, 64, 1])
     fc_layer_1 = fully_connected(input_layer, 128,
                                  activation='relu',
@@ -118,20 +118,35 @@ def make_image_ann_model():
     model = tflearn.DNN(network)
     return model
 
+def image_ann_model_layers():
+    input_layer = input_data(shape=[None, 64, 64, 1])
+    fc_layer_1 = fully_connected(input_layer, 128,
+                                 activation='relu',
+                                 name='fc_layer_1')
+    fc_layer_2 = fully_connected(fc_layer_1, 16,
+                                 activation='relu',
+                                 name='fc_layer_2')
+    return fully_connected(fc_layer_2, 2,
+                                 activation='softmax',
+                                 name='fc_layer_3')
+
+def make_image_ann_model():
+    layers = image_ann_model_layers()
+    network = regression(layers, optimizer='sgd',
+                         loss='categorical_crossentropy',
+                         learning_rate=0.1)
+    model = tflearn.DNN(network)
+    return model
+
 # Note that the load function must mimick the
 # the archictecture of the persisted model!!!
 
 
 def load_image_ann_model(model_path):
-    input_layer = input_data(shape=[None, 64, 64, 1])
-    fc_layer_1 = fully_connected(input_layer, 128,
-                                 activation='relu',
-                                 name='fc_layer_1')
-    fc_layer_2 = fully_connected(fc_layer_1, 2,
-                                 activation='softmax',
-                                 name='fc_layer_2')
-    model = tflearn.DNN(fc_layer_2)
-    model.load(model_path)
+    tf.compat.v1.reset_default_graph()
+    layers = image_ann_model_layers()
+    model = tflearn.DNN(layers)
+    model.load(model_path, weights_only=True)
     return model
 
 # test a tfl network model on valid_X and valid_Y.
