@@ -23,7 +23,7 @@ def load(file_name):
 
 
 # Paths to all datasets. Change accordingly.
-PATH = '/home/fox/Documents/Intelligent Systems/project 1/datasets/tflearn/'
+PATH = '/home/fox/Documents/Intelligent Systems/project 1/datasets/'
 BEE1_gray_base_path = PATH + 'BEE1_gray/'
 BEE2_1S_gray_base_path = PATH + 'BEE2_1S_gray/'
 BEE4_gray_base_path = PATH + 'BEE4_gray/'
