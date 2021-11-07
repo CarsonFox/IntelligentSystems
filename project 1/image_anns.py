@@ -6,7 +6,7 @@ import numpy as np
 from tfl_image_anns import *
 
 def benchmark(name, layers):
-    epochs = 2
+    epochs = 40
     ann = make_image_ann(layers)
 
     test_accuracies = []
@@ -29,13 +29,17 @@ def benchmark(name, layers):
     return (name, test_accuracies, valid_accuracies)
 
 if __name__ == "__main__":
-    networks = {
-        '16': layers_16,
-        '32': layers_32,
-        '16x16': layers_16x16,
-        '16x16_dropout': layers_16x16_dropout,
-    }
+    with open('output', 'w') as f:
+        networks = {
+            '16': layers_16,
+            '32': layers_32,
+            '16x16': layers_16x16,
+            '16x16_dropout': layers_16x16_dropout,
+            '32x32': layers_32x32,
+            '32x32_dropout': layers_32x32_dropout,
+        }
 
-    benchmarks = [benchmark(name, layers()) for name, layers in networks.items()]
+        benchmarks = [benchmark(name, layers()) for name, layers in networks.items()]
 
-    print(benchmarks)
+        print(benchmarks)
+        f.write(f'{benchmarks}')
