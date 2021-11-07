@@ -33,8 +33,12 @@ Description: Some word definitions for CA
 (define-ca-word
     bought
     (concept ?pay (atrans :object (money) :time (past)))
-    (request (test (before ?pay ?actor (animate)))
-             (actions (modify ?pay :actor ?actor))))
+    (request (test (and
+                     (before ?pay ?actor (animate))
+                     (after ?pay ?item (concept))))
+             (actions
+               (modify ?pay :actor ?actor)
+               (concept nil (ptrans :object ?item :to ?actor)))))
 
 (define-ca-word
     kite
