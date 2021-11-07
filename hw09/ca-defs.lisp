@@ -38,7 +38,7 @@ Description: Some word definitions for CA
                      (after ?pay ?item (concept))))
              (actions
                (modify ?pay :actor ?actor)
-               (concept nil (ptrans :object ?item :to ?actor)))))
+               (concept nil (atrans :object ?item :to ?actor)))))
 
 (define-ca-word
     kite
