@@ -31,15 +31,12 @@ def benchmark(name, layers):
 if __name__ == "__main__":
     with open('output', 'w') as f:
         networks = {
-            '16': layers_16,
-            '32': layers_32,
-            '16x16': layers_16x16,
-            '16x16_dropout': layers_16x16_dropout,
-            '32x32': layers_32x32,
-            '32x32_dropout': layers_32x32_dropout,
+            '64x64x64': layers_64x64x64,
         }
 
         benchmarks = [benchmark(name, layers()) for name, layers in networks.items()]
 
-        print(benchmarks)
-        f.write(f'{benchmarks}')
+        for name, test, valid in benchmarks:
+            print(f'{name},')
+            print(','.join(test))
+            print(','.join(valid))

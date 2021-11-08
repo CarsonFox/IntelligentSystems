@@ -203,6 +203,56 @@ def layers_32x32_dropout():
     return fully_connected(fc_layer_3, 2,
                                  activation='softmax',
                                  name='output_layer')
+def layers_32x32x32():
+    input_layer = input_data(shape=[None, 64, 64, 1])
+    fc_layer_1 = fully_connected(input_layer, 128,
+                                 activation='relu',
+                                 name='fc_layer_1')
+    fc_layer_2 = fully_connected(fc_layer_1, 32,
+                                 activation='relu',
+                                 name='fc_layer_2')
+    fc_layer_3 = fully_connected(fc_layer_2, 32,
+                                 activation='relu',
+                                 name='fc_layer_3')
+    fc_layer_4 = fully_connected(fc_layer_3, 32,
+                                 activation='relu',
+                                 name='fc_layer_4')
+    return fully_connected(fc_layer_4, 2,
+                                 activation='softmax',
+                                 name='output_layer')
+
+def layers_64x64():
+    input_layer = input_data(shape=[None, 64, 64, 1])
+    fc_layer_1 = fully_connected(input_layer, 128,
+                                 activation='relu',
+                                 name='fc_layer_1')
+    fc_layer_2 = fully_connected(fc_layer_1, 64,
+                                 activation='relu',
+                                 name='fc_layer_2')
+    fc_layer_3 = fully_connected(fc_layer_2, 64,
+                                 activation='relu',
+                                 name='fc_layer_3')
+    return fully_connected(fc_layer_3, 2,
+                                 activation='softmax',
+                                 name='output_layer')
+
+def layers_64x64x64():
+    input_layer = input_data(shape=[None, 64, 64, 1])
+    fc_layer_1 = fully_connected(input_layer, 128,
+                                 activation='relu',
+                                 name='fc_layer_1')
+    fc_layer_2 = fully_connected(fc_layer_1, 64,
+                                 activation='relu',
+                                 name='fc_layer_2')
+    fc_layer_3 = fully_connected(fc_layer_2, 64,
+                                 activation='relu',
+                                 name='fc_layer_3')
+    fc_layer_4 = fully_connected(fc_layer_3, 64,
+                                 activation='relu',
+                                 name='fc_layer_4')
+    return fully_connected(fc_layer_4, 2,
+                                 activation='softmax',
+                                 name='output_layer')
 
 def make_image_ann(layers):
     network = regression(layers, optimizer='sgd',
