@@ -9,7 +9,7 @@ import pickle
 import numpy as np
 import tensorflow as tf
 import tflearn
-from tflearn.layers.core import input_data, fully_connected
+from tflearn.layers.core import input_data, fully_connected, dropout
 from tflearn.layers.conv import conv_2d, max_pool_2d
 from tflearn.layers.estimator import regression
 
@@ -102,7 +102,7 @@ assert BEE4_valid_X.shape[0] == BEE4_valid_Y.shape[0]
 # here's an example of how to make an ConvNet with tflearn.
 
 
-def make_image_convnet_model():
+def example_layers():
     input_layer = input_data(shape=[None, 64, 64, 3])
     conv_layer_1 = conv_2d(input_layer,
                            nb_filter=8,
@@ -113,32 +113,173 @@ def make_image_convnet_model():
     fc_layer_1 = fully_connected(pool_layer_1, 128,
                                  activation='relu',
                                  name='fc_layer_1')
-    fc_layer_2 = fully_connected(fc_layer_1, 2,
+    return fully_connected(fc_layer_1, 2,
                                  activation='softmax',
                                  name='fc_layer_2')
-    network = regression(fc_layer_2, optimizer='sgd',
+
+
+def layers_1conv_1fc():
+    input_layer = input_data(shape=[None, 64, 64, 3])
+    conv_layer_1 = conv_2d(input_layer, nb_filter=10,
+                         filter_size=5,
+                         activation='sigmoid',
+                         name='conv_layer_1')
+    pool_layer_1 = max_pool_2d(conv_layer_1, 2, name='pool_layer_1')
+
+    fc_layer_1 = fully_connected(pool_layer_1, 80,
+                                 activation='relu',
+                                 name='fc_layer_1')
+
+    return fully_connected(fc_layer_1, 2,
+                                 activation='softmax',
+                                 name='output_layer')
+
+
+def layers_2conv_1fc():
+    input_layer = input_data(shape=[None, 64, 64, 3])
+    conv_layer_1 = conv_2d(input_layer, nb_filter=10,
+                         filter_size=5,
+                         activation='sigmoid',
+                         name='conv_layer_1')
+    pool_layer_1 = max_pool_2d(conv_layer_1, 2, name='pool_layer_1')
+
+    conv_layer_2 = conv_2d(pool_layer_1, nb_filter=20,
+                         filter_size=5,
+                         activation='relu',
+                         name='conv_layer_2')
+    pool_layer_2 = max_pool_2d(conv_layer_2, 2, name='pool_layer_2')
+
+    fc_layer_1 = fully_connected(pool_layer_2, 80,
+                                 activation='relu',
+                                 name='fc_layer_1')
+
+    return fully_connected(fc_layer_1, 2,
+                                 activation='softmax',
+                                 name='output_layer')
+
+
+def layers_2conv_2fc():
+    input_layer = input_data(shape=[None, 64, 64, 3])
+    conv_layer_1 = conv_2d(input_layer, nb_filter=10,
+                         filter_size=5,
+                         activation='sigmoid',
+                         name='conv_layer_1')
+    pool_layer_1 = max_pool_2d(conv_layer_1, 2, name='pool_layer_1')
+
+    conv_layer_2 = conv_2d(pool_layer_1, nb_filter=20,
+                         filter_size=5,
+                         activation='relu',
+                         name='conv_layer_2')
+    pool_layer_2 = max_pool_2d(conv_layer_2, 2, name='pool_layer_2')
+
+    fc_layer_1 = fully_connected(pool_layer_2, 80,
+                                 activation='relu',
+                                 name='fc_layer_1')
+
+    fc_layer_2 = fully_connected(fc_layer_1, 100,
+                                 activation='relu',
+                                 name='fc_layer_2')
+
+    return fully_connected(fc_layer_2, 2,
+                                 activation='softmax',
+                                 name='output_layer')
+
+
+def layers_2conv_2fc_small_kernel():
+    input_layer = input_data(shape=[None, 64, 64, 3])
+    conv_layer_1 = conv_2d(input_layer, nb_filter=10,
+                         filter_size=3,
+                         activation='sigmoid',
+                         name='conv_layer_1')
+    pool_layer_1 = max_pool_2d(conv_layer_1, 2, name='pool_layer_1')
+
+    conv_layer_2 = conv_2d(pool_layer_1, nb_filter=20,
+                         filter_size=3,
+                         activation='relu',
+                         name='conv_layer_2')
+    pool_layer_2 = max_pool_2d(conv_layer_2, 2, name='pool_layer_2')
+
+    fc_layer_1 = fully_connected(pool_layer_2, 80,
+                                 activation='relu',
+                                 name='fc_layer_1')
+
+    fc_layer_2 = fully_connected(fc_layer_1, 100,
+                                 activation='relu',
+                                 name='fc_layer_2')
+
+    return fully_connected(fc_layer_2, 2,
+                                 activation='softmax',
+                                 name='output_layer')
+
+
+def layers_2conv_2fc_large_kernel():
+    input_layer = input_data(shape=[None, 64, 64, 3])
+    conv_layer_1 = conv_2d(input_layer, nb_filter=10,
+                         filter_size=3,
+                         activation='sigmoid',
+                         name='conv_layer_1')
+    pool_layer_1 = max_pool_2d(conv_layer_1, 2, name='pool_layer_1')
+
+    conv_layer_2 = conv_2d(pool_layer_1, nb_filter=20,
+                         filter_size=5,
+                         activation='relu',
+                         name='conv_layer_2')
+    pool_layer_2 = max_pool_2d(conv_layer_2, 2, name='pool_layer_2')
+
+    fc_layer_1 = fully_connected(pool_layer_2, 80,
+                                 activation='relu',
+                                 name='fc_layer_1')
+
+    fc_layer_2 = fully_connected(fc_layer_1, 100,
+                                 activation='relu',
+                                 name='fc_layer_2')
+
+    return fully_connected(fc_layer_2, 2,
+                                 activation='softmax',
+                                 name='output_layer')
+
+
+def layers_2conv_2fc_dropout():
+    input_layer = input_data(shape=[None, 64, 64, 3])
+    conv_layer_1 = conv_2d(input_layer, nb_filter=10,
+                         filter_size=5,
+                         activation='sigmoid',
+                         name='conv_layer_1')
+    pool_layer_1 = max_pool_2d(conv_layer_1, 2, name='pool_layer_1')
+
+    conv_layer_2 = conv_2d(pool_layer_1, nb_filter=20,
+                         filter_size=5,
+                         activation='relu',
+                         name='conv_layer_2')
+    pool_layer_2 = max_pool_2d(conv_layer_2, 2, name='pool_layer_2')
+
+    fc_layer_1 = fully_connected(pool_layer_2, 80,
+                                 activation='relu',
+                                 name='fc_layer_1')
+    fc_layer_1 = dropout(fc_layer_1, 0.5)
+
+    fc_layer_2 = fully_connected(fc_layer_1, 100,
+                                 activation='relu',
+                                 name='fc_layer_2')
+    fc_layer_2 = dropout(fc_layer_2, 0.5)
+
+    return fully_connected(fc_layer_2, 2,
+                                 activation='softmax',
+                                 name='output_layer')
+
+
+def make_convnet_model(layers):
+    network = regression(layers, optimizer='sgd',
                          loss='categorical_crossentropy',
                          learning_rate=0.1)
     model = tflearn.DNN(network)
     return model
 
 
-def load_image_convnet_model(model_path):
-    input_layer = input_data(shape=[None, 64, 64, 3])
-    conv_layer_1 = conv_2d(input_layer,
-                           nb_filter=8,
-                           filter_size=3,
-                           activation='relu',
-                           name='conv_layer_1')
-    pool_layer_1 = max_pool_2d(conv_layer_1, 2, name='pool_layer_1')
-    fc_layer_1 = fully_connected(pool_layer_1, 128,
-                                 activation='relu',
-                                 name='fc_layer_1')
-    fc_layer_2 = fully_connected(fc_layer_1, 2,
-                                 activation='softmax',
-                                 name='fc_layer_2')
-    model = tflearn.DNN(fc_layer_2)
-    model.load(model_path)
+def load_image_convnet_model(model_path, layers):
+    tf.compat.v1.reset_default_graph()
+    model = tflearn.DNN(layers)
+    model.load(model_path, weights_only=True)
     return model
 
 
