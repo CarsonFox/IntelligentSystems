@@ -116,8 +116,7 @@ def example_convnet_layers():
                                  name='fc_layer_2')
 
 
-def make_audio_convnet_model():
-    layers = example_convnet_layers()
+def make_audio_convnet_model(layers):
     network = regression(layers, optimizer='sgd',
                          loss='categorical_crossentropy',
                          learning_rate=0.1)
@@ -126,20 +125,8 @@ def make_audio_convnet_model():
 
 
 def load_audio_convnet_model(model_path):
-    input_layer = input_data(shape=[None, 4000, 1, 1])
-    conv_layer_1 = conv_2d(input_layer,
-                           nb_filter=8,
-                           filter_size=3,
-                           activation='relu',
-                           name='conv_layer_1')
-    pool_layer_1 = max_pool_2d(conv_layer_1, 2, name='pool_layer_1')
-    fc_layer_1 = fully_connected(pool_layer_1, 128,
-                                 activation='relu',
-                                 name='fc_layer_1')
-    fc_layer_2 = fully_connected(fc_layer_1, 3,
-                                 activation='softmax',
-                                 name='fc_layer_2')
-    model = tflearn.DNN(fc_layer_2)
+    tf.compat.v1.reset_default_graph()
+    model = make_audio_convnet_model(example_convnet_layers())
     model.load(model_path)
     return model
 
