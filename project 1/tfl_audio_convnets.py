@@ -100,7 +100,7 @@ assert BUZZ3_test_X.shape[0] == BUZZ3_test_Y.shape[0]
 assert BUZZ3_valid_X.shape[0] == BUZZ3_valid_Y.shape[0]
 
 
-def make_audio_convnet_model():
+def example_convnet_layers():
     input_layer = input_data(shape=[None, 4000, 1, 1])
     conv_layer_1 = conv_2d(input_layer,
                            nb_filter=8,
@@ -111,10 +111,14 @@ def make_audio_convnet_model():
     fc_layer_1 = fully_connected(pool_layer_1, 128,
                                  activation='relu',
                                  name='fc_layer_1')
-    fc_layer_2 = fully_connected(fc_layer_1, 3,
+    return fully_connected(fc_layer_1, 3,
                                  activation='softmax',
                                  name='fc_layer_2')
-    network = regression(fc_layer_2, optimizer='sgd',
+
+
+def make_audio_convnet_model():
+    layers = example_convnet_layers()
+    network = regression(layers, optimizer='sgd',
                          loss='categorical_crossentropy',
                          learning_rate=0.1)
     model = tflearn.DNN(network)

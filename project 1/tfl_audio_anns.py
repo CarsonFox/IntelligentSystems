@@ -103,15 +103,18 @@ assert BUZZ3_valid_X.shape[0] == BUZZ3_valid_Y.shape[0]
 # plus the input layer and the output layer of appropriate dimensions.
 
 
-def make_audio_ann_model():
+def example_layers():
     input_layer = input_data(shape=[None, 4000, 1, 1])
     fc_layer_1 = fully_connected(input_layer, 128,
                                  activation='relu',
                                  name='fc_layer_1')
-    fc_layer_2 = fully_connected(fc_layer_1, 3,
+    return fully_connected(fc_layer_1, 3,
                                  activation='softmax',
                                  name='fc_layer_2')
-    network = regression(fc_layer_2, optimizer='sgd',
+
+
+def make_audio_ann_model(layers):
+    network = regression(layers, optimizer='sgd',
                          loss='categorical_crossentropy',
                          learning_rate=0.1)
     model = tflearn.DNN(network)
@@ -122,14 +125,8 @@ def make_audio_ann_model():
 
 
 def load_audio_ann_model(model_path):
-    input_layer = input_data(shape=[None, 4000, 1, 1])
-    fc_layer_1 = fully_connected(input_layer, 128,
-                                 activation='relu',
-                                 name='fc_layer_1')
-    fc_layer_2 = fully_connected(fc_layer_1, 3,
-                                 activation='softmax',
-                                 name='fc_layer_2')
-    model = tflearn.DNN(fc_layer_2)
+    tf.compat.v1.reset_default_graph()
+    model = make_audio_ann_model(example_layers())
     model.load(model_path)
     return model
 
