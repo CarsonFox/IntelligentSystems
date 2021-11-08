@@ -1,3 +1,6 @@
 datasets/
 notes
 models/
+output
+output.csv
+.~lock*
