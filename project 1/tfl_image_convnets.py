@@ -120,13 +120,12 @@ def example_layers():
 
 def layers_1conv_1fc():
     input_layer = input_data(shape=[None, 64, 64, 3])
-    conv_layer_1 = conv_2d(input_layer, nb_filter=10,
-                         filter_size=5,
-                         activation='sigmoid',
+    conv_layer_1 = conv_2d(input_layer, nb_filter=5,
+                         filter_size=3,
+                         activation='relu',
                          name='conv_layer_1')
     pool_layer_1 = max_pool_2d(conv_layer_1, 2, name='pool_layer_1')
-
-    fc_layer_1 = fully_connected(pool_layer_1, 80,
+    fc_layer_1 = fully_connected(pool_layer_1, 128,
                                  activation='relu',
                                  name='fc_layer_1')
 

@@ -6,7 +6,7 @@ import numpy as np
 from tfl_image_convnets import *
 
 def benchmark(name, layers):
-    epochs = 20
+    epochs = 2
     ann = make_convnet_model(layers)
 
     test_accuracies = []
@@ -32,16 +32,11 @@ if __name__ == "__main__":
     with open('output', 'w') as f:
         networks = {
             'layers_1conv_1fc': layers_1conv_1fc,
-            'layers_2conv_1fc': layers_2conv_1fc,
-            'layers_2conv_2fc': layers_2conv_2fc,
-            'layers_2conv_2fc_small_kernel': layers_2conv_2fc_small_kernel,
-            'layers_2conv_2fc_large_kernel': layers_2conv_2fc_large_kernel,
-            'layers_2conv_2fc_dropout': layers_2conv_2fc_dropout,
         }
 
         benchmarks = [benchmark(name, layers()) for name, layers in networks.items()]
 
         for name, test, valid in benchmarks:
             print(f'{name},')
-            print(','.join(test))
-            print(','.join(valid))
+            print(','.join(map(str, test)))
+            print(','.join(map(str, valid)))
