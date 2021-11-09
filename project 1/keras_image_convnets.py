@@ -98,7 +98,8 @@ def create_keras_model_2cl(learning_rate=0.01, weight_decay=0.001, dropout=0.2):
     return model
 
 
-def create_keras_model_2cl_2hl(learning_rate=0.01, weight_decay=0.001, dropout=0.2):
+# def create_keras_model_2cl_2hl(learning_rate=0.01, weight_decay=0.001, dropout=0.2):
+def create_keras_model(learning_rate=0.01, weight_decay=0.001, dropout=0.2):
     model = keras.models.Sequential([
         # 32 filters, each of which is 3x3, padding="same" means that the output
         # is of the same size of the input, which in this case will be 64x64.
@@ -127,9 +128,9 @@ def create_keras_model_2cl_2hl(learning_rate=0.01, weight_decay=0.001, dropout=0
     return model
 
 
-def train_keras_model(learning_rate=0.01, weight_decay=0.001, dropout=0.2, epochs=5):
+def train_keras_model(learning_rate=0.01, weight_decay=0.001, dropout=0.2, epochs=80):
     # Create a basic model instance
-    model = create_keras_model_2cl_2hl(learning_rate, weight_decay, dropout)
+    model = create_keras_model(learning_rate, weight_decay, dropout)
 
     # Display the model's architecture
     model.summary()
