@@ -267,6 +267,10 @@ def layers_2conv_2fc_dropout():
                                  name='output_layer')
 
 
+def best_convnet_layers():
+    return layers_2conv_2fc_small_kernel()
+
+
 def make_convnet_model(layers):
     network = regression(layers, optimizer='sgd',
                          loss='categorical_crossentropy',
@@ -275,8 +279,9 @@ def make_convnet_model(layers):
     return model
 
 
-def load_image_convnet_model(model_path, layers):
+def load_image_convnet_model(model_path):
     tf.compat.v1.reset_default_graph()
+    layers = best_convnet_layers()
     model = tflearn.DNN(layers)
     model.load(model_path, weights_only=True)
     return model

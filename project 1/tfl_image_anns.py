@@ -254,6 +254,11 @@ def layers_64x64x64():
                                  activation='softmax',
                                  name='output_layer')
 
+
+def best_ann_model():
+    return layers_64x64x64()
+
+
 def make_image_ann(layers):
     network = regression(layers, optimizer='sgd',
                          loss='categorical_crossentropy',
@@ -264,16 +269,15 @@ def make_image_ann(layers):
 # Note that the load function must mimick the
 # the archictecture of the persisted model!!!
 
-
-def load_image_ann_model(model_path, layers):
+def load_image_ann_model(model_path):
     tf.compat.v1.reset_default_graph()
+    layers = best_ann_model()
     model = tflearn.DNN(layers)
     model.load(model_path, weights_only=True)
     return model
 
+
 # test a tfl network model on valid_X and valid_Y.
-
-
 def test_tfl_image_ann_model(network_model, valid_X, valid_Y):
     results = []
     for i in range(len(valid_X)):
