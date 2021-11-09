@@ -268,7 +268,7 @@ def layers_2conv_2fc_dropout():
 
 
 def best_convnet_layers():
-    return layers_2conv_2fc_large_kernel()
+    return layers_2conv_2fc_dropout()
 
 
 def make_convnet_model(layers):
