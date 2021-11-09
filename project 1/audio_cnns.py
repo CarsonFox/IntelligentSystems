@@ -23,7 +23,7 @@ def big_train():
                                   test_X, test_Y,
                                   num_epochs=20)
 
-    ann.save('models/aud_ann.tfl')
+    ann.save('models/aud_cn.tfl')
 
 def benchmark(name, layers):
     epochs = 10

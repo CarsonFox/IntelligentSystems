@@ -106,7 +106,7 @@ def create_keras_model(learning_rate=0.01, weight_decay=0.001, dropout=0.2):
         keras.layers.Conv2D(32, (3, 3), padding="same",
                             activation='relu', input_shape=(64, 64, 3)),
         keras.layers.MaxPooling2D((2, 2)),
-        keras.layers.Conv2D(64, (3, 3), padding="same",
+        keras.layers.Conv2D(32, (7, 7), padding="same",
                             activation='relu', input_shape=(64, 64, 3)),
         keras.layers.MaxPooling2D((2, 2)),
         keras.layers.Flatten(),
