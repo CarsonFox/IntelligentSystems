@@ -16,39 +16,39 @@ import unittest
 class tfl_audio_uts(unittest.TestCase):
 
     def test_tfl_audio_ann_buzz1(self):
-        tf.reset_default_graph()
+        tf.compat.v1.reset_default_graph()
         an = load_audio_ann_model('models/aud_ann.tfl')
         vacc = validate_tfl_audio_ann_model(an, BUZZ1_valid_X, BUZZ1_valid_Y)
         print('**** Ann valid. acc on BUZZ1 = {}'.format(vacc))
 
     def test_tfl_audio_ann_buzz2(self):
-        tf.reset_default_graph()
+        tf.compat.v1.reset_default_graph()
         an = load_audio_ann_model('models/aud_ann.tfl')
         vacc = validate_tfl_audio_ann_model(an, BUZZ2_valid_X, BUZZ2_valid_Y)
         print('**** Ann valid. acc on BUZZ2 = {}'.format(vacc))
 
     def test_tfl_audio_ann_buzz3(self):
-        tf.reset_default_graph()
+        tf.compat.v1.reset_default_graph()
         an = load_audio_ann_model('models/aud_ann.tfl')
         vacc = validate_tfl_audio_ann_model(an, BUZZ3_valid_X, BUZZ3_valid_Y)
         print('**** Ann valid. acc on BUZZ3 = {}'.format(vacc))
 
     def test_tfl_audio_convnet_buzz1(self):
-        tf.reset_default_graph()
+        tf.compat.v1.reset_default_graph()
         cn = load_audio_convnet_model('models/aud_cn.tfl')
         vacc = validate_tfl_audio_convnet_model(
             cn, BUZZ1_valid_X, BUZZ1_valid_Y)
         print('**** CN valid. acc on BUZZ1 = {}'.format(vacc))
 
     def test_tfl_audio_convnet_buzz2(self):
-        tf.reset_default_graph()
+        tf.compat.v1.reset_default_graph()
         cn = load_audio_convnet_model('models/aud_cn.tfl')
         vacc = validate_tfl_audio_convnet_model(
             cn, BUZZ2_valid_X, BUZZ2_valid_Y)
         print('**** CN valid. acc on BUZZ2 = {}'.format(vacc))
 
     def test_tfl_audio_convnet_buzz3(self):
-        tf.reset_default_graph()
+        tf.compat.v1.reset_default_graph()
         cn = load_audio_convnet_model('models/aud_cn.tfl')
         vacc = validate_tfl_audio_convnet_model(
             cn, BUZZ3_valid_X, BUZZ3_valid_Y)
