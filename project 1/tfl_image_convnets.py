@@ -120,8 +120,8 @@ def example_layers():
 
 def layers_1conv_1fc():
     input_layer = input_data(shape=[None, 64, 64, 3])
-    conv_layer_1 = conv_2d(input_layer, nb_filter=5,
-                         filter_size=3,
+    conv_layer_1 = conv_2d(input_layer, nb_filter=10,
+                         filter_size=5,
                          activation='relu',
                          name='conv_layer_1')
     pool_layer_1 = max_pool_2d(conv_layer_1, 2, name='pool_layer_1')
@@ -214,13 +214,13 @@ def layers_2conv_2fc_small_kernel():
 def layers_2conv_2fc_large_kernel():
     input_layer = input_data(shape=[None, 64, 64, 3])
     conv_layer_1 = conv_2d(input_layer, nb_filter=10,
-                         filter_size=3,
+                         filter_size=5,
                          activation='sigmoid',
                          name='conv_layer_1')
     pool_layer_1 = max_pool_2d(conv_layer_1, 2, name='pool_layer_1')
 
     conv_layer_2 = conv_2d(pool_layer_1, nb_filter=20,
-                         filter_size=5,
+                         filter_size=7,
                          activation='relu',
                          name='conv_layer_2')
     pool_layer_2 = max_pool_2d(conv_layer_2, 2, name='pool_layer_2')
