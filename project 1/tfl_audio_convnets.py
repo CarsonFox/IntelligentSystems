@@ -116,6 +116,155 @@ def example_convnet_layers():
                                  name='fc_layer_2')
 
 
+def layers_1conv_1fc():
+    input_layer = input_data(shape=[None, 4000, 1, 1])
+    conv_layer_1 = conv_2d(input_layer, nb_filter=10,
+                         filter_size=5,
+                         activation='relu',
+                         name='conv_layer_1')
+    pool_layer_1 = max_pool_2d(conv_layer_1, 2, name='pool_layer_1')
+    fc_layer_1 = fully_connected(pool_layer_1, 128,
+                                 activation='relu',
+                                 name='fc_layer_1')
+
+    return fully_connected(fc_layer_1, 3,
+                                 activation='softmax',
+                                 name='output_layer')
+
+
+def layers_2conv_1fc():
+    input_layer = input_data(shape=[None, 4000, 1, 1])
+    conv_layer_1 = conv_2d(input_layer, nb_filter=10,
+                         filter_size=5,
+                         activation='sigmoid',
+                         name='conv_layer_1')
+    pool_layer_1 = max_pool_2d(conv_layer_1, 2, name='pool_layer_1')
+
+    conv_layer_2 = conv_2d(pool_layer_1, nb_filter=20,
+                         filter_size=5,
+                         activation='relu',
+                         name='conv_layer_2')
+    pool_layer_2 = max_pool_2d(conv_layer_2, 2, name='pool_layer_2')
+
+    fc_layer_1 = fully_connected(pool_layer_2, 80,
+                                 activation='relu',
+                                 name='fc_layer_1')
+
+    return fully_connected(fc_layer_1, 3,
+                                 activation='softmax',
+                                 name='output_layer')
+
+
+def layers_2conv_2fc():
+    input_layer = input_data(shape=[None, 4000, 1, 1])
+    conv_layer_1 = conv_2d(input_layer, nb_filter=10,
+                         filter_size=5,
+                         activation='sigmoid',
+                         name='conv_layer_1')
+    pool_layer_1 = max_pool_2d(conv_layer_1, 2, name='pool_layer_1')
+
+    conv_layer_2 = conv_2d(pool_layer_1, nb_filter=20,
+                         filter_size=5,
+                         activation='relu',
+                         name='conv_layer_2')
+    pool_layer_2 = max_pool_2d(conv_layer_2, 2, name='pool_layer_2')
+
+    fc_layer_1 = fully_connected(pool_layer_2, 80,
+                                 activation='relu',
+                                 name='fc_layer_1')
+
+    fc_layer_2 = fully_connected(fc_layer_1, 100,
+                                 activation='relu',
+                                 name='fc_layer_2')
+
+    return fully_connected(fc_layer_2, 3,
+                                 activation='softmax',
+                                 name='output_layer')
+
+
+def layers_2conv_2fc_small_kernel():
+    input_layer = input_data(shape=[None, 4000, 1, 1])
+    conv_layer_1 = conv_2d(input_layer, nb_filter=10,
+                         filter_size=3,
+                         activation='sigmoid',
+                         name='conv_layer_1')
+    pool_layer_1 = max_pool_2d(conv_layer_1, 2, name='pool_layer_1')
+
+    conv_layer_2 = conv_2d(pool_layer_1, nb_filter=20,
+                         filter_size=3,
+                         activation='relu',
+                         name='conv_layer_2')
+    pool_layer_2 = max_pool_2d(conv_layer_2, 2, name='pool_layer_2')
+
+    fc_layer_1 = fully_connected(pool_layer_2, 80,
+                                 activation='relu',
+                                 name='fc_layer_1')
+
+    fc_layer_2 = fully_connected(fc_layer_1, 100,
+                                 activation='relu',
+                                 name='fc_layer_2')
+
+    return fully_connected(fc_layer_2, 3,
+                                 activation='softmax',
+                                 name='output_layer')
+
+
+def layers_2conv_2fc_large_kernel():
+    input_layer = input_data(shape=[None, 4000, 1, 1])
+    conv_layer_1 = conv_2d(input_layer, nb_filter=10,
+                         filter_size=5,
+                         activation='sigmoid',
+                         name='conv_layer_1')
+    pool_layer_1 = max_pool_2d(conv_layer_1, 2, name='pool_layer_1')
+
+    conv_layer_2 = conv_2d(pool_layer_1, nb_filter=20,
+                         filter_size=7,
+                         activation='relu',
+                         name='conv_layer_2')
+    pool_layer_2 = max_pool_2d(conv_layer_2, 2, name='pool_layer_2')
+
+    fc_layer_1 = fully_connected(pool_layer_2, 80,
+                                 activation='relu',
+                                 name='fc_layer_1')
+
+    fc_layer_2 = fully_connected(fc_layer_1, 100,
+                                 activation='relu',
+                                 name='fc_layer_2')
+
+    return fully_connected(fc_layer_2, 3,
+                                 activation='softmax',
+                                 name='output_layer')
+
+
+def layers_2conv_2fc_dropout():
+    input_layer = input_data(shape=[None, 4000, 1, 1])
+    conv_layer_1 = conv_2d(input_layer, nb_filter=10,
+                         filter_size=5,
+                         activation='sigmoid',
+                         name='conv_layer_1')
+    pool_layer_1 = max_pool_2d(conv_layer_1, 2, name='pool_layer_1')
+
+    conv_layer_2 = conv_2d(pool_layer_1, nb_filter=20,
+                         filter_size=5,
+                         activation='relu',
+                         name='conv_layer_2')
+    pool_layer_2 = max_pool_2d(conv_layer_2, 2, name='pool_layer_2')
+
+    fc_layer_1 = fully_connected(pool_layer_2, 80,
+                                 activation='relu',
+                                 name='fc_layer_1')
+    fc_layer_1 = dropout(fc_layer_1, 0.5)
+
+    fc_layer_2 = fully_connected(fc_layer_1, 100,
+                                 activation='relu',
+                                 name='fc_layer_2')
+    fc_layer_2 = dropout(fc_layer_2, 0.5)
+
+    return fully_connected(fc_layer_2, 3,
+                                 activation='softmax',
+                                 name='output_layer')
+
+
 def make_audio_convnet_model(layers):
     network = regression(layers, optimizer='sgd',
                          loss='categorical_crossentropy',

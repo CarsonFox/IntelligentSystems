@@ -9,7 +9,7 @@ import pickle
 import numpy as np
 import tensorflow as tf
 import tflearn
-from tflearn.layers.core import input_data, fully_connected
+from tflearn.layers.core import input_data, fully_connected, dropout
 from tflearn.layers.estimator import regression
 
 # we need this to load the pickled data into Python.
@@ -113,6 +113,147 @@ def example_layers():
                                  name='fc_layer_2')
 
 
+def layers_16():
+    input_layer = input_data(shape=[None, 4000, 1, 1])
+    fc_layer_1 = fully_connected(input_layer, 128,
+                                 activation='relu',
+                                 name='fc_layer_1')
+    fc_layer_2 = fully_connected(fc_layer_1, 16,
+                                 activation='relu',
+                                 name='fc_layer_2')
+    return fully_connected(fc_layer_2, 3,
+                                 activation='softmax',
+                                 name='output_layer')
+
+def layers_32():
+    input_layer = input_data(shape=[None, 4000, 1, 1])
+    fc_layer_1 = fully_connected(input_layer, 128,
+                                 activation='relu',
+                                 name='fc_layer_1')
+    fc_layer_2 = fully_connected(fc_layer_1, 32,
+                                 activation='relu',
+                                 name='fc_layer_2')
+    return fully_connected(fc_layer_2, 3,
+                                 activation='softmax',
+                                 name='output_layer')
+
+def layers_16x16():
+    input_layer = input_data(shape=[None, 4000, 1, 1])
+    fc_layer_1 = fully_connected(input_layer, 128,
+                                 activation='relu',
+                                 name='fc_layer_1')
+    fc_layer_2 = fully_connected(fc_layer_1, 16,
+                                 activation='relu',
+                                 name='fc_layer_2')
+    fc_layer_3 = fully_connected(fc_layer_2, 16,
+                                 activation='relu',
+                                 name='fc_layer_3')
+    return fully_connected(fc_layer_3, 3,
+                                 activation='softmax',
+                                 name='output_layer')
+
+def layers_16x16_dropout():
+    input_layer = input_data(shape=[None, 4000, 1, 1])
+    fc_layer_1 = fully_connected(input_layer, 128,
+                                 activation='relu',
+                                 name='fc_layer_1')
+    fc_layer_2 = fully_connected(fc_layer_1, 16,
+                                 activation='relu',
+                                 name='fc_layer_2')
+    dropout_layer = dropout(fc_layer_2, 0.5)
+    fc_layer_3 = fully_connected(dropout_layer, 16,
+                                 activation='relu',
+                                 name='fc_layer_3')
+    return fully_connected(fc_layer_3, 3,
+                                 activation='softmax',
+                                 name='output_layer')
+
+def layers_32x32():
+    input_layer = input_data(shape=[None, 4000, 1, 1])
+    fc_layer_1 = fully_connected(input_layer, 128,
+                                 activation='relu',
+                                 name='fc_layer_1')
+    fc_layer_2 = fully_connected(fc_layer_1, 32,
+                                 activation='relu',
+                                 name='fc_layer_2')
+    fc_layer_3 = fully_connected(fc_layer_2, 32,
+                                 activation='relu',
+                                 name='fc_layer_3')
+    return fully_connected(fc_layer_3, 3,
+                                 activation='softmax',
+                                 name='output_layer')
+
+def layers_32x32_dropout():
+    input_layer = input_data(shape=[None, 4000, 1, 1])
+    fc_layer_1 = fully_connected(input_layer, 128,
+                                 activation='relu',
+                                 name='fc_layer_1')
+    fc_layer_2 = fully_connected(fc_layer_1, 32,
+                                 activation='relu',
+                                 name='fc_layer_2')
+    dropout_layer = dropout(fc_layer_2, 0.5)
+    fc_layer_3 = fully_connected(dropout_layer, 32,
+                                 activation='relu',
+                                 name='fc_layer_3')
+    return fully_connected(fc_layer_3, 3,
+                                 activation='softmax',
+                                 name='output_layer')
+def layers_32x32x32():
+    input_layer = input_data(shape=[None, 4000, 1, 1])
+    fc_layer_1 = fully_connected(input_layer, 128,
+                                 activation='relu',
+                                 name='fc_layer_1')
+    fc_layer_2 = fully_connected(fc_layer_1, 32,
+                                 activation='relu',
+                                 name='fc_layer_2')
+    fc_layer_3 = fully_connected(fc_layer_2, 32,
+                                 activation='relu',
+                                 name='fc_layer_3')
+    fc_layer_4 = fully_connected(fc_layer_3, 32,
+                                 activation='relu',
+                                 name='fc_layer_4')
+    return fully_connected(fc_layer_4, 3,
+                                 activation='softmax',
+                                 name='output_layer')
+
+def layers_64x64():
+    input_layer = input_data(shape=[None, 4000, 1, 1])
+    fc_layer_1 = fully_connected(input_layer, 128,
+                                 activation='relu',
+                                 name='fc_layer_1')
+    fc_layer_2 = fully_connected(fc_layer_1, 64,
+                                 activation='relu',
+                                 name='fc_layer_2')
+    fc_layer_3 = fully_connected(fc_layer_2, 64,
+                                 activation='relu',
+                                 name='fc_layer_3')
+    return fully_connected(fc_layer_3, 3,
+                                 activation='softmax',
+                                 name='output_layer')
+
+def layers_64x64x64():
+    input_layer = input_data(shape=[None, 4000, 1, 1])
+    fc_layer_1 = fully_connected(input_layer, 128,
+                                 activation='relu',
+                                 name='fc_layer_1')
+    fc_layer_2 = fully_connected(fc_layer_1, 64,
+                                 activation='relu',
+                                 name='fc_layer_2')
+    fc_layer_3 = fully_connected(fc_layer_2, 64,
+                                 activation='relu',
+                                 name='fc_layer_3')
+    fc_layer_4 = fully_connected(fc_layer_3, 64,
+                                 activation='relu',
+                                 name='fc_layer_4')
+    return fully_connected(fc_layer_4, 3,
+                                 activation='softmax',
+                                 name='output_layer')
+
+
+def best_layers():
+    return layers_64x64x64()
+
+
 def make_audio_ann_model(layers):
     network = regression(layers, optimizer='sgd',
                          loss='categorical_crossentropy',
@@ -126,7 +267,7 @@ def make_audio_ann_model(layers):
 
 def load_audio_ann_model(model_path):
     tf.compat.v1.reset_default_graph()
-    model = make_audio_ann_model(example_layers())
+    model = make_audio_ann_model(best_layers())
     model.load(model_path)
     return model
 
