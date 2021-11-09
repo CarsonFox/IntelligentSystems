@@ -5,6 +5,26 @@ from os import path
 import numpy as np
 from tfl_audio_anns import *
 
+def big_train():
+    ann = make_audio_ann_model(best_layers())
+
+    datasets = [
+        ((BUZZ1_train_X, BUZZ1_train_Y),
+         (BUZZ1_test_X, BUZZ1_test_Y)),
+        ((BUZZ2_train_X, BUZZ2_train_Y),
+         (BUZZ2_test_X, BUZZ2_test_Y)),
+        ((BUZZ3_train_X, BUZZ3_train_Y),
+         (BUZZ3_test_X, BUZZ3_test_Y)),
+    ]
+
+    for (train_X, train_Y), (test_X, test_Y) in datasets:
+        train_tfl_audio_ann_model(ann,
+                                  train_X, train_Y,
+                                  test_X, test_Y,
+                                  num_epochs=20)
+
+    ann.save('models/aud_ann.tfl')
+
 def benchmark(name, layers):
     epochs = 40
     ann = make_audio_ann_model(layers)
@@ -29,25 +49,4 @@ def benchmark(name, layers):
     return (name, test_accuracies, valid_accuracies)
 
 if __name__ == "__main__":
-    with open('output', 'w') as f:
-        networks = {
-            '16': layers_16,
-            '16x16': layers_16x16,
-            '16x16_dropout': layers_16x16_dropout,
-            '32': layers_32,
-            '32x32': layers_32x32,
-            '32x32_dropout': layers_32x32_dropout,
-            '32x32x32': layers_32x32x32,
-            '64x64': layers_64x64,
-            '64x64x64': layers_64x64x64,
-        }
-
-        benchmarks = [benchmark(name, layers()) for name, layers in networks.items()]
-
-        for name, test, valid in benchmarks:
-            print(f'{name},')
-            print(','.join(map(str, test)))
-            print(','.join(map(str, valid)))
-            f.write(f'{name},')
-            f.write(','.join(map(str, test)))
-            f.write(','.join(map(str, valid)))
+    big_train()
