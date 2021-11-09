@@ -31,12 +31,13 @@ def benchmark(name, layers):
 if __name__ == "__main__":
     with open('output', 'w') as f:
         networks = {
-            '1x1': layers_1conv_1fc,
-            '2x1': layers_2conv_1fc,
-            '2x2': layers_2conv_2fc,
-            'dropout': layers_2conv_2fc_dropout,
-            'small': layers_2conv_2fc_small_kernel,
-            'large': layers_2conv_2fc_large_kernel,
+            #'1x1': layers_1conv_1fc,
+            #'2x1': layers_2conv_1fc,
+            #'2x2': layers_2conv_2fc,
+            #'dropout': layers_2conv_2fc_dropout,
+            #'small': layers_2conv_2fc_small_kernel,
+            #'large': layers_2conv_2fc_large_kernel,
+            'img_cnn.tfl': layers_2conv_2fc_large_kernel,
         }
 
         benchmarks = [benchmark(name, layers()) for name, layers in networks.items()]
