@@ -9,7 +9,7 @@ import pickle
 import numpy as np
 import tensorflow as tf
 import tflearn
-from tflearn.layers.core import input_data, fully_connected
+from tflearn.layers.core import input_data, fully_connected, dropout
 from tflearn.layers.conv import conv_2d, max_pool_2d
 from tflearn.layers.estimator import regression
 
@@ -273,9 +273,13 @@ def make_audio_convnet_model(layers):
     return model
 
 
+def best_convnet_layers():
+    return layers_2conv_2fc_dropout()
+
+
 def load_audio_convnet_model(model_path):
     tf.compat.v1.reset_default_graph()
-    model = make_audio_convnet_model(example_convnet_layers())
+    model = make_audio_convnet_model(best_convnet_layers())
     model.load(model_path)
     return model
 
