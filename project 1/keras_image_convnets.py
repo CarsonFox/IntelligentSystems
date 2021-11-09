@@ -47,7 +47,7 @@ def example_create_keras_model(learning_rate=0.01, weight_decay=0.001, dropout=0
     return model
 
 
-def create_keras_model(learning_rate=0.01, weight_decay=0.001, dropout=0.2):
+def create_keras_model_2hl(learning_rate=0.01, weight_decay=0.001, dropout=0.2):
     model = keras.models.Sequential([
         # 32 filters, each of which is 3x3, padding="same" means that the output
         # is of the same size of the input, which in this case will be 64x64.
@@ -73,9 +73,63 @@ def create_keras_model(learning_rate=0.01, weight_decay=0.001, dropout=0.2):
     return model
 
 
+def create_keras_model_2cl(learning_rate=0.01, weight_decay=0.001, dropout=0.2):
+    model = keras.models.Sequential([
+        # 32 filters, each of which is 3x3, padding="same" means that the output
+        # is of the same size of the input, which in this case will be 64x64.
+        keras.layers.Conv2D(32, (3, 3), padding="same",
+                            activation='relu', input_shape=(64, 64, 3)),
+        keras.layers.MaxPooling2D((2, 2)),
+        keras.layers.Conv2D(64, (3, 3), padding="same",
+                            activation='relu', input_shape=(64, 64, 3)),
+        keras.layers.MaxPooling2D((2, 2)),
+        keras.layers.Flatten(),
+        keras.layers.Dropout(dropout),
+
+        keras.layers.Dense(
+            128, activation='relu', kernel_regularizer=keras.regularizers.l2(weight_decay)),
+
+        keras.layers.Dense(num_classes, activation='softmax')
+    ])
+    opt = keras.optimizers.Adam(learning_rate=learning_rate)
+    model.compile(optimizer=opt,
+                  loss='categorical_crossentropy',
+                  metrics=['accuracy'])
+    return model
+
+
+def create_keras_model_2cl_2hl(learning_rate=0.01, weight_decay=0.001, dropout=0.2):
+    model = keras.models.Sequential([
+        # 32 filters, each of which is 3x3, padding="same" means that the output
+        # is of the same size of the input, which in this case will be 64x64.
+        keras.layers.Conv2D(32, (3, 3), padding="same",
+                            activation='relu', input_shape=(64, 64, 3)),
+        keras.layers.MaxPooling2D((2, 2)),
+        keras.layers.Conv2D(64, (3, 3), padding="same",
+                            activation='relu', input_shape=(64, 64, 3)),
+        keras.layers.MaxPooling2D((2, 2)),
+        keras.layers.Flatten(),
+        keras.layers.Dropout(dropout),
+
+        keras.layers.Dense(
+            128, activation='relu', kernel_regularizer=keras.regularizers.l2(weight_decay)),
+
+        # Second hidden layer
+        keras.layers.Dense(
+            64, activation='relu', kernel_regularizer=keras.regularizers.l2(weight_decay)),
+
+        keras.layers.Dense(num_classes, activation='softmax')
+    ])
+    opt = keras.optimizers.Adam(learning_rate=learning_rate)
+    model.compile(optimizer=opt,
+                  loss='categorical_crossentropy',
+                  metrics=['accuracy'])
+    return model
+
+
 def train_keras_model(learning_rate=0.01, weight_decay=0.001, dropout=0.2, epochs=5):
     # Create a basic model instance
-    model = create_keras_model(learning_rate, weight_decay, dropout)
+    model = create_keras_model_2cl_2hl(learning_rate, weight_decay, dropout)
 
     # Display the model's architecture
     model.summary()
