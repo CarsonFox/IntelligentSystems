@@ -21,7 +21,7 @@ def big_train():
         train_tfl_image_ann_model(ann,
                                   train_X, train_Y,
                                   test_X, test_Y,
-                                  num_epochs=40)
+                                  num_epochs=20)
 
     ann.save('models/img_ann.tfl')
 

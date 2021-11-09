@@ -6,7 +6,7 @@ import numpy as np
 from tfl_audio_convnets import *
 
 def benchmark(name, layers):
-    epochs = 8
+    epochs = 10
     ann = make_audio_convnet_model(layers)
 
     test_accuracies = []
