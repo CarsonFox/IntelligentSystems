@@ -1,9 +1,27 @@
 #!/bin/python
 
 from os import path
+from functools import reduce
 
 import numpy as np
 from tfl_image_convnets import *
+
+def big_train():
+    ann = make_convnet_model(best_convnet_layers())
+
+    datasets = [
+        ((BEE1_train_X, BEE1_train_Y), (BEE1_test_X, BEE1_test_Y)),
+        ((BEE2_1S_train_X, BEE2_1S_train_Y), (BEE2_1S_test_X, BEE2_1S_test_Y)),
+        ((BEE4_train_X, BEE4_train_Y), (BEE4_test_X, BEE4_test_Y)),
+    ]
+
+    for (train_X, train_Y), (test_X, test_Y) in datasets:
+        train_tfl_image_convnet_model(ann,
+                                  train_X, train_Y,
+                                  test_X, test_Y,
+                                  num_epochs=10)
+
+    ann.save('models/img_cn.tfl')
 
 def benchmark(name, layers):
     epochs = 10
@@ -29,20 +47,4 @@ def benchmark(name, layers):
     return (name, test_accuracies, valid_accuracies)
 
 if __name__ == "__main__":
-    with open('output', 'w') as f:
-        networks = {
-            #'1x1': layers_1conv_1fc,
-            #'2x1': layers_2conv_1fc,
-            #'2x2': layers_2conv_2fc,
-            #'dropout': layers_2conv_2fc_dropout,
-            #'small': layers_2conv_2fc_small_kernel,
-            #'large': layers_2conv_2fc_large_kernel,
-            'img_cnn.tfl': layers_2conv_2fc_large_kernel,
-        }
-
-        benchmarks = [benchmark(name, layers()) for name, layers in networks.items()]
-
-        for name, test, valid in benchmarks:
-            print(f'{name},')
-            print(','.join(map(str, test)))
-            print(','.join(map(str, valid)))
+    big_train()
