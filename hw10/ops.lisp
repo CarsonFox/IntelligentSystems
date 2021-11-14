@@ -68,7 +68,18 @@
 
 (defparameter *block-ops*
   (list
-   ;;; your block world operators to avoid the Sussman Anomaly.
+    (make-op :action 'move-c-a->t
+             :preconds '(c-on-a clear-c)
+             :add-list '(clear-a a-on-t)
+             :del-list '(c-on-a))
+    (make-op :action 'move-b-t->c
+             :preconds '(b-on-t clear-b clear-c)
+             :add-list '(b-on-c)
+             :del-list '(clear-c b-on-t))
+    (make-op :action 'move-a-t->b
+             :preconds '(a-on-t clear-a clear-b b-on-c)
+             :add-list '(a-on-b)
+             :del-list '(a-on-t clear-b))
    )
   )
 	    
