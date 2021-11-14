@@ -4,6 +4,12 @@
 ;;; bugs to vladimir kulyukin in canvas
 ;;; =========================================
 
+;;; Problem 2 plan:
+;;; ((START) (EXECUTE MOVE-C-A->T) (EXECUTE MOVE-B-T->C) (EXECUTE MOVE-A-T->B))
+
+;;; Problem 3 plan:
+;;; ((START) (EXECUTE DROP-BALL) (EXECUTE PUSH-CHAIR) (EXECUTE CLIMB-CHAIR) (EXECUTE GRASP-BANANA) (EXECUTE EAT-BANANA))
+
 (in-package :user)
 
 (defstruct op "An operation"
